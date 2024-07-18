@@ -16,16 +16,19 @@ bot = telebot.TeleBot(API_TOKEN)
 
 def info_wolfram(query):
     client = Client()
-    response = client.chat.comption.create(
-        model="gpt-3.5-turbo",
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo"
         messages=[{"role": "user", "content": query}]
     )
     return response.choices[0].message.content
 
 
+print(info_wolfram("Я очень добрый и всегда всем помогаю. На какого персонажа я похож?"))
+
+
 @bot.message_handler(commands=["create_img"])
 def photo(message):
-    bot.send_message(message.chat.id, "Отправте описание картинкиы")
+    bot.send_message(message.chat.id, "Отправте описание картинки")
     bot.register_next_step_handler(message, send_den_img)
 
 
